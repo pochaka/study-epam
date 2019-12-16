@@ -1,2 +1,2 @@
 # study-epam
-Epam dev
+Epam studying
