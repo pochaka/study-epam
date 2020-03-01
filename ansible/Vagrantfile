@@ -1,0 +1,28 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+$hostsfile_update = <<-'SCRIPT'
+echo -e '10.0.0.10 control\n10.0.0.20 node1\n10.0.0.30 node2' >> /etc/hosts
+sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config && systemctl restart sshd
+SCRIPT
+
+Vagrant.configure("2") do |config|
+  config.vm.define "control", primary: true do |control|
+    control.vm.box = "centos/7"
+    control.vm.hostname = "control"
+    control.vm.network "private_network", ip: "10.0.0.10"
+    control.vm.provision "shell", inline: $hostsfile_update
+  end
+  config.vm.define "node1" do |node1|
+    node1.vm.box = "centos/7"
+    node1.vm.hostname = "node1"
+    node1.vm.network "private_network", ip: "10.0.0.20"
+    node1.vm.provision "shell", inline: $hostsfile_update
+  end
+  config.vm.define "node2" do |node2|
+    node2.vm.box = "centos/7"
+    node2.vm.hostname = "node2"
+    node2.vm.network "private_network", ip: "10.0.0.30"
+    node2.vm.provision "shell", inline: $hostsfile_update
+  end
+
+end

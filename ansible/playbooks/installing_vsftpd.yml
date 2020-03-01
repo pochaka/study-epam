@@ -1,0 +1,43 @@
+- hosts: httpd
+  tasks:
+  - name: Installing vsftpd
+    become: yes
+    yum:
+      name: vsftpd
+      state: present
+
+  - name: Opening ports
+    become: yes
+    firewalld:
+      immediate: yes
+      permanent: yes
+      service: ftp
+      state: enabled
+      zone: public
+
+  - name: Creating /var/ftp/pub
+    become: yes
+    file:
+      path: /var/ftp/pub
+      state: directory
+      group: ftp
+      owner: ftp
+#  - name: Allowing full rw access through SELinux
+#    become: yes
+#    seboolean:
+#    - name: ftp_full_access
+#      state: yes
+#      persistent: yes
+#
+#  - name: Setting fsftpd home directory
+#    seboolean:
+#    - name: ftp_home_dir
+#      state: yes
+#      persistent: yes
+#
+#  - name: Configuring vsftpd
+#    become: yes
+#    vars:
+#      anonymous: yes
+
+

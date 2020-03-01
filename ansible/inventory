@@ -1,0 +1,9 @@
+[all]
+node1
+node2
+
+[httpd]
+node2
+
+[nm]
+node1

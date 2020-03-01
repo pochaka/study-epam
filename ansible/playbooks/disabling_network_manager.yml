@@ -1,0 +1,27 @@
+- hosts: nm
+  tasks: 
+  - name: Disabling NetworkManager autostart
+    become: yes
+    service:
+      name: NetworkManager
+      enabled: no
+    
+  - name: Stopping NetworkManager
+    become: yes
+    service:
+      name: NetworkManager
+      state: stopped
+
+  - name: Adding paramenters to /etc/default/grub
+    become: yes
+    lineinfile:
+      path: /etc/default/grub 
+      line: '\1 net.ifnames=0 biosdevname=0\2'
+      state: present
+      regexp: ^(GRUB_CMDLINE_LINUX=(?!.*net\.ifnames.*biosdevname.*)\"[^\"]+)(\".*)
+      backrefs: yes
+
+  - name: Making grub2 config
+    become: yes
+    shell:
+      cmd: "grub2-mkconfig"

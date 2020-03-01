@@ -1,0 +1,47 @@
+- hosts: httpd
+  tasks:
+  - name: Ensuring httpd is present
+    become: yes
+    yum:
+      name: httpd
+      state: present
+
+  - name: Starting httpd
+    become: yes
+    service:
+      name: httpd
+      state: started
+
+  - name: Enabling httpd autostart
+    become: yes
+    service:
+      name: httpd
+      enabled: yes
+
+  - name: Ensure index.html is present and correct
+    become: yes
+    lineinfile:
+      line: "Welcome to my web server"
+      path: /var/www/html/index.html
+      state: present
+      create: yes
+      group: root
+      owner: root
+      mode: 0644
+
+  - name: Open 80 port for httpd
+    become: yes
+    firewalld:
+      immediate: yes
+      permanent: yes
+      service: http
+      state: enabled
+      zone: public
+
+
+
+
+
+
+
+

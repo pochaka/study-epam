@@ -1,0 +1,24 @@
+- hosts: httpd
+  tasks:
+  - name: Uninstalling httpd
+    become: yes
+    yum:
+      name: httpd
+      state: absent
+
+  - name: Closing ports
+    become: yes
+    firewalld:
+      immediate: yes
+      permanent: yes
+      service: http
+      state: disabled
+      zone: public
+
+  - name: Deleting index.html
+    become: yes
+    file:
+      path: /var/www/html/index.html
+      state: absent
+
+  

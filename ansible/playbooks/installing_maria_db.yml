@@ -1,0 +1,13 @@
+- hosts: nm
+  tasks:
+  - name: Checking file /tmp/database
+    stat:
+      path: /tmp/database
+    register: db_file
+
+  - name: Installing mariadb
+    become: yes
+    yum:
+      name: mariadb
+      state: present
+    when: db_file.stat.exists == true
