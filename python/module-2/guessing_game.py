@@ -1,6 +1,6 @@
 from random import randint
 
-number = randint(1, 101)
+number = randint(1, 100)
 guessed_number = None
 
 print("Угадай число между 1 и 100")
