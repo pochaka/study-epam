@@ -5,5 +5,3 @@ def multiply_in_range(start: int, stop: int):
         if number % 7 == 0 and number % 5 != 0:
             result.append(number)
     return result
-
-print(multiply_in_range(1, 77))
