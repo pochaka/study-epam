@@ -10,9 +10,9 @@ def swap_max_and_min(list: list):
             max_value = value
             max_index = list.index(value)
         elif value == min_value or value == max_value:
-            raise ValueError
+            raise ValueError("Duplicate numbers.")
         elif not isinstance(value, (int, float)):
-            raise TypeError
+            raise TypeError("Not int or float.")
         elif value > max_value:
             max_value = value
             max_index = list.index(value)
