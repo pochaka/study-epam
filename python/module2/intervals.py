@@ -1,10 +1,11 @@
 from sys import argv
 
-if len(argv) < 2:
-    print("Передайте параметр!")
-elif (int(argv[1]) > -15 and int(argv[1]) <= 12)  \
-    or (int(argv[1]) > 14 and int(argv[1]) < 17)  \
-    or int(argv[1]) >= 19:
+try:
+    number = int(argv[1])
+except ValueError:
+    raise ValueError("Передайте параметр!")
+
+if -15 < number <= 12 or 14 < number < 17 or number >= 19:
     print("True")
 else:
-    print(False)
+    print("False")
