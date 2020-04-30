@@ -12,3 +12,10 @@ class Employee(object):
 
     def __str__(self):
         return f"{self.full_name} - {self.money}"
+    
+    def new(self, first_name, last_name, full_name, email, money):
+        return Employee(first_name, last_name, full_name, email, money)
+
+    @property
+    def full_name(self):
+        return self.full_name
