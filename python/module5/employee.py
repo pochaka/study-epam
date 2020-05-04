@@ -12,10 +12,18 @@ class Employee(object):
 
     def __str__(self):
         return f"{self.full_name} - {self.money}"
-    
-    def new(self, first_name, last_name, full_name, email, money):
-        return Employee(first_name, last_name, full_name, email, money)
 
     @property
-    def full_name(self):
-        return self.full_name
+    def employee_full_name(self):
+        return f"{self.full_name}"
+
+    @employee_full_name.setter
+    def employee_full_name(self, full_name_string):
+        self.full_name = full_name_string.split("-")
+
+    @classmethod
+    def from_string(cls, employee_str):
+        first_name, last_name, full_name, email, money = employee_str.split("-")
+        return cls(first_name, last_name, full_name, email, money)
+
+    
