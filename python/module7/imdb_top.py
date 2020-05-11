@@ -3,69 +3,6 @@ import bs4
 from re import match, compile, search, sub
 import json
 
-class Movie:
-    def __init__(self, position, title, year, director, crew, rating):
-        self.position = position
-        self.title = title
-        self.year = year
-        self.director = director
-        self.crew = crew
-        self.rating = rating
-
-    def __repr__(self):
-        return f"Movie({self.title}, {self.year}, {self.position}, {self.rating}, {self.director}, {self.crew})"
-
-    def __str__(self):
-        return f"{self.title}, {self.year}"
-
-    @property
-    def position(self):
-        return f"{self.position}"
-    
-    @position.setter
-    def position(self, position):
-        self.position = position
-
-    @property
-    def title(self):
-        return f"{self.title}"
-
-    @title.setter
-    def title(self, title):
-        self.title = title
-
-    @property
-    def year(self):
-        return f"{self.year}"
-    
-    @year.setter
-    def year(self, year):
-        self.year = year
-
-    @property
-    def director(self):
-        return f"{self.director}"
-    
-    @director.setter
-    def director(self, director):
-        self.director = director
-
-    @property
-    def crew(self):
-        return f"{self.crew}"
-
-    @crew.setter
-    def crew(self, crew):
-        self.crew = crew
-
-    @property
-    def rating(self):
-        return f"{self.rating}"
-
-    @rating.setter
-    def rating(self, rating):
-        self.rating = rating
-
 url = "https://imdb.com/chart/top"
 
 page = requests.get(url, headers = {"Accept-Language": "en-US"})
